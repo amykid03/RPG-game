@@ -1,11 +1,12 @@
 #include "game.h"
 
-void init_game(int* player_hp, int* player_att, int* player_def, short inventory[], int* monster_hp, int* monster_att, int* monster_def) {
+void init_game(int* player_hp, int* player_att, int* player_def, short inventory[], long* cache, int* monster_hp, int* monster_att, int* monster_def) {
 	
 	printf("initialize the game.\n");
 	*player_hp = 100;
 	*player_att = 10;
 	*player_def = 8;
+	*cache = 0;
 
 	for (int i = 0; i < INVENTORY_SIZE; ++i)
 		inventory[i] = 0;
@@ -17,7 +18,7 @@ void init_game(int* player_hp, int* player_att, int* player_def, short inventory
 	srand(time(NULL));
 }
 
-void run_game(int* player_hp, int* player_att, int* player_def, short inventory[], int* monster_hp, int* monster_att, int* monster_def) {
+void run_game(int* player_hp, int* player_att, int* player_def, short inventory[], long* cache, int* monster_hp, int* monster_att, int* monster_def) {
 	while (1) {
 		print_status(*player_hp, *player_att, *player_def, inventory,
 			*monster_hp, *monster_att, *monster_def);
@@ -29,6 +30,11 @@ void run_game(int* player_hp, int* player_att, int* player_def, short inventory[
 		else if (choice == 2) defense(player_hp, *player_att, *player_def,
 			monster_hp, *monster_att, *monster_def);
 		else if (choice == 3) {
+			// 1. 팔 아이템의 인덱스를 입력 받는다.
+			// 2. 입력 받은 인덱스에 해당하는 배열의 값을 가지고 와서, cache에 더한다.
+			// 3. 배열에서 팔린 아이템의 자리를 0 으로 초기화한다.
+		}
+		else if (choice == 4) {
 			printf("Bye bye!\n");
 			break;
 		}
@@ -115,7 +121,8 @@ int print_menu() {
 	printf("Menu======================\n");
 	printf("1. Attack.\n");
 	printf("2. Defense.\n");
-	printf("3. Run.\n");
+	printf("3. Sell item.\n");
+	printf("4. Run.\n");
 	printf("==========================\n");
 
 	int choice;

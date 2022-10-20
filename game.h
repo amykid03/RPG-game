@@ -29,7 +29,7 @@ int print_menu();
 int calculate_damage(int, int, int);
 void attack(int*, int, int, int*, int, int);
 void defense(int*, int, int, int*, int, int);
-void init_game(int*, int*, int*, short[], int*, int*, int*);
-void run_game(int*, int*, int*, short[], int*, int*, int*);
+void init_game(int*, int*, int*, short[], long*, int*, int*, int*);
+void run_game(int*, int*, int*, short[], long*, int*, int*, int*);
 
 #endif
